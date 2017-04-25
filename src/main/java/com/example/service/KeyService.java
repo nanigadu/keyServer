@@ -11,12 +11,12 @@ public class KeyService {
 
   private static ArrayList<String> keys = new ArrayList<>();
 
-  private static HashMap<String, Boolean> usedKeys = new HashMap<String, Boolean>();
+  private static HashMap<String, Boolean> usedKeys = new HashMap<>();
 
   public static String generatekeys() {
 
     String uuid = UUID.randomUUID().toString();
-    while (usedKeys.containsKey(uuid) || keys.con) {
+    while (usedKeys.containsKey(uuid) || keys.contains(uuid)) {
       uuid = UUID.randomUUID().toString();
     }
     keys.add(uuid);
@@ -24,13 +24,11 @@ public class KeyService {
   }
 
   public String getKey() {
-    // TODO Auto-generated method stub
-    if(keys.isEmpty())
-      return "noKey";
-    else
-    {
+    if (!keys.isEmpty()) {
       usedKeys.put(keys.get(0), true);
       return keys.remove(0);
+    } else {
+      return "";
     }
   }
 
